@@ -11,11 +11,11 @@ Dados::Dados(){ //Constructor
    d1_=d2_=1; //Se inician ambos dados con valor 1
    lanzamientos1_=lanzamientos2_=0; //Se inicia el nº de lanzamientos a 0
    sum1_=sum2_=0; //Se inicia la suma de ambos dados a 0
-   v1_.resize(5); //Se redimensionan el vector del dado 1 con 5 elementos
-   v2_.resize(5); //Se redimensionan el vector del dado 2 con 5 elementos
+   v1_.resize(5); //Se redimensiona el vector del dado 1 con 5 elementos
+   v2_.resize(5); //Se redimensiona el vector del dado 2 con 5 elementos
    v1_[0]=d1_; //Se pone el primer valor del vector del dado 1 con el valor del dado
    v2_[0]=d2_; //Se pone el primer valor del vector del dado 2 con el valor del dado
-   for(int i=1;i<5;i++){ //Se pone a 0 todos los demás elementos de ambos vectores
+   for(int i=1;i<5;i++){ //Se ponen a 0 todos los demás elementos de ambos vectores
        v1_[i]=0;
        v2_[i]=0;
    }
