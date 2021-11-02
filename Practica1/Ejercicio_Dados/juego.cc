@@ -7,21 +7,23 @@
 using namespace std;
 
 void menu(){ //Menú con las funciones del programa
-    cout << "--------------------JUEGO DE LOS DADOS--------------------\n\n";
-    cout << "Seleccione qué desea hacer:\n";
-    cout << "1. Lanzamiento de los dados\n";
-    cout << "2. Mostrar valor del dado 1\n";
-    cout << "3. Mostrar valor del dado 2\n";
-    cout << "4. Editar valor del dado 1\n";
-    cout << "5. Editar valor del dado 2\n";
-    cout << "6. Mostrar la suma de los valores de ambos dados\n";
-    cout << "7. Mostrar la diferencia de los valores de ambos dados\n";
-    cout << "8. Mostrar el nº de lanzamientos del dado 1\n";
-    cout << "9. Mostrar el nº de lanzamientos del dado 2\n";
-    cout << "10. Mostrar la media de los valores adquiridos por el dado 1\n";
-    cout << "11. Mostrar la media de los valores adquiridos por el dado 2\n";
-    cout << "12. Mostrar los últimos cinco valores obtenidos en el dado 1\n";
-    cout << "13. Mostrar los últimos cinco valores obtenidos en el dado 2\n";
+    cout << "   -------------------------JUEGO DE LOS DADOS-------------------------\n";
+    cout << "   |   Seleccione qué desea hacer:                                    |\n";
+    cout << "   |   1. Lanzamiento de los dados                                    |\n";
+    cout << "   |   2. Mostrar valor del dado 1                                    |\n";
+    cout << "   |   3. Mostrar valor del dado 2                                    |\n";
+    cout << "   |   4. Editar valor del dado 1                                     |\n";
+    cout << "   |   5. Editar valor del dado 2                                     |\n";
+    cout << "   |   6. Mostrar la suma de los valores de ambos dados               |\n";
+    cout << "   |   7. Mostrar la diferencia de los valores de ambos dados         |\n";
+    cout << "   |   8. Mostrar el nº de lanzamientos del dado 1                    |\n";
+    cout << "   |   9. Mostrar el nº de lanzamientos del dado 2                    |\n";
+    cout << "   |   10. Mostrar la media de los valores adquiridos por el dado 1   |\n";
+    cout << "   |   11. Mostrar la media de los valores adquiridos por el dado 2   |\n";
+    cout << "   |   12. Mostrar los últimos cinco valores obtenidos en el dado 1   |\n";
+    cout << "   |   13. Mostrar los últimos cinco valores obtenidos en el dado 2   |\n";
+    cout << "   |   14. Salir del programa                                         |\n";
+    cout << "   --------------------------------------------------------------------\n";
 }
 
 bool continuar(){ //Función bucle para continuar ejecutando el programa
@@ -32,6 +34,8 @@ bool continuar(){ //Función bucle para continuar ejecutando el programa
         return true;
     }
     else{
+        system("clear");
+        cout << "Hasta pronto =)\n\n";
         exit(0);
     }
     cout << "\n";
@@ -120,6 +124,11 @@ int main(){
                 int v2[5];
                 d.getUltimos2(v2);
             break;
+
+            case 14:
+                system("clear");
+                cout << "Hasta pronto =)\n\n";
+                exit(0);
 
             default: //Si la opción no es válida se imprime un mensaje de error
                 cout << "Opción no válida\n";
