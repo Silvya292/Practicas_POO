@@ -8,32 +8,38 @@ using namespace std;
 
 int main(){
     cout << "Comprobación del funcionamiento de la clase Jugador\n\n";
-    cout << "DATOS DEL JUGADOR:\n";
-
-    string dni, codigo, nombre, apellidos, direccion, localidad, provincia, pais;
-    int edad;
-
+    cout << "   ----------------------------------DATOS DEL JUGADOR-----------------------------------------\n\n";    
+    Jugador j("x","x"); //Objeto auxiliar de la clase Jugador
+    string cadena; //Cadena para leer los datos
     cout << "Introduzca su DNI: ";
-    cin >> dni;
+    getline(cin,cadena,'\n');
+    j.setDNI(cadena);
     cout << "Introduzca ahora su código de jugador: ";
-    cin >> codigo;
+    getline(cin,cadena,'\n');
+    j.setCodigo(cadena);
     cout << "Introduzca su nombre: ";
-    cin >> nombre;
+    getline(cin,cadena,'\n');
+    j.setNombre(cadena);
     cout << "Introduzca sus apellidos: ";
-    cin >> apellidos;
+    getline(cin,cadena,'\n');
+    j.setApellidos(cadena);
     cout << "Introduzca su edad: ";
-    cin >> edad;
+    getline(cin,cadena,'\n');
+    j.setEdad(stoi(cadena));
     cout << "Introduzca su dirección: ";
-    cin >> direccion;
+    getline(cin,cadena,'\n');
+    j.setDireccion(cadena);
     cout << "Introduzca su localidad: ";
-    cin >> localidad;
+    getline(cin,cadena,'\n');
+    j.setLocalidad(cadena);
     cout << "Introduzca su provincia: ";
-    cin >> provincia;
+    getline(cin,cadena,'\n');
+    j.setProvincia(cadena);
     cout << "Introduzca su país: ";
-    cin >> pais;
+    getline(cin,cadena,'\n');
+    j.setPais(cadena);
     system("clear");
 
-    Jugador j(dni,codigo,nombre,apellidos,edad,direccion,localidad,provincia,pais); //Se define un elemento auxiliar de la clase jugador
     list <Apuesta> apuestas; //Se define una lista auxiliar de apuestas
     j.setApuestas(); //Se leen del fichero las apuestas del jugador
     apuestas=j.getApuestas(); //Se asocian las apuestas del jugador a la lista auxiliar
