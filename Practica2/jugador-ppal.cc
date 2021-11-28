@@ -45,7 +45,7 @@ int main(){
     apuestas=j.getApuestas(); //Se asocian las apuestas del jugador a la lista auxiliar
 
     list <Apuesta>::iterator i; //Se define un iterador para recorrer la lista
-    int n=1;
+    int n=1; //Contador de apuestas
     cout << "Jugador " << j.getCodigo() << ":\n\n";
 
     for(i=apuestas.begin();i!=apuestas.end();i++){ //Se imprime la lista de apuestas del jugador

@@ -26,7 +26,7 @@ void Jugador::setApuestas(){ //Asociación de la lista de apuestas obtenida con 
         apuesta.valor=cadena;
         getline(file,cadena,'\n');
         apuesta.cantidad=stoi(cadena);
-        apuestas_.push_back(apuesta);
+        apuestas_.push_back(apuesta); //Se añaden todos los elementos de la lista leídos al final de la lista de apuestas del jugador
         getline(file,cadena,',');
     }
     file.close(); //Se cierra el fichero

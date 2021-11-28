@@ -18,8 +18,8 @@ struct Apuesta{ //Declaración de un struct para las apuestas
 
 class Jugador: public Persona{ //La clase Jugador hereda la parte public de la clase Persona
     private:
-        int dinero_;
-        string codigo_;
+        int dinero_; //Dinero del jugador
+        string codigo_; //Código alfanumérico del jugador
         list <Apuesta> apuestas_; //Lista de apuestas del jugador
     public:
         Jugador(string dni,string codigo,string nombre="",string apellidos="",int edad=0,string direccion="",string localidad="",string provincia="",string pais=""):Persona(dni,nombre,apellidos,edad,direccion,localidad,provincia,pais){ //Constructor de la clase
