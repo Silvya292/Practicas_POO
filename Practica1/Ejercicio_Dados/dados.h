@@ -25,8 +25,8 @@ class Dados{
         void lanzamiento(); //Función que simula el lanzamiento de dos dados
         inline int getDado1() const{return d1_;} //Función que devuelve el valor del dado 1
         inline int getDado2() const{return d2_;} //Función que devuelve el valor del dado 2
-        int setDado1(const int &n); //Función que asocia el valor insertado con el dado 1
-        int setDado2(const int &n); //Función que asocia el valor insertado con el dado 2
+        bool setDado1(const int &n); //Función que asocia el valor insertado con el dado 1
+        bool setDado2(const int &n); //Función que asocia el valor insertado con el dado 2
         inline int getSuma()const{return d1_+d2_;} //Función que devuelve la suma de los valores de ambos dados
         inline int getDiferencia()const{return (abs(d1_-d2_));} //Función que devuelve la diferencia de los valores de ambos dados
         inline int getLanzamientos1() const{return lanzamientos1_;} //Función que devuelve el nº de lanzamientos del dado 1

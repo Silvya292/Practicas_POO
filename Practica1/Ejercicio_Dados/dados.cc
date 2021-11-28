@@ -26,7 +26,7 @@ void Dados::lanzamiento(){ //Lanzamiento de ambos dados
     setDado2((rand()%6)+1); //Nº pseudoaleatorio entre 1 y 6
 }
 
-int Dados::setDado1(const int &n){ //Asociación del valor insertado al dado 1
+bool Dados::setDado1(const int &n){ //Asociación del valor insertado al dado 1
     if((0<n)&&(n<7)){ //Se comprueba que sea un valor válido y se asocia
         d1_=n;
         lanzamientos1_++; //Se aumenta el nº de lanzamientos
@@ -39,7 +39,7 @@ int Dados::setDado1(const int &n){ //Asociación del valor insertado al dado 1
     }
 }
 
-int Dados::setDado2(const int &n){ //Asociación del valor insertado al dado 2
+bool Dados::setDado2(const int &n){ //Asociación del valor insertado al dado 2
     if((0<n)&&(n<7)){ //Se comprueba que sea un valor válido y se asocia
         d2_=n;
         lanzamientos2_++; //Se aumenta el nº de lanzamientos
