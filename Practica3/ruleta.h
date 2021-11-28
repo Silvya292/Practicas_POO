@@ -9,9 +9,9 @@
 
 class Ruleta{
     private:
-        int banca_;
-        int bola_;
-        list <Jugador> jugadores_;
+        int banca_; //Dinero de la banca
+        int bola_; //Número de la ruleta
+        list <Jugador> jugadores_; //Lista de jugadores
         Crupier crupier_; //Objeto de la clase Crupier
         bool rojo_negro(string const &color); //Función para comprobar el color de la apuesta
         bool par_impar(string const &parimpar); //Función para comprobar la paridad de la apuesta
@@ -22,7 +22,6 @@ class Ruleta{
             banca_=1000000;
             bola_=-1;
         };
-
         inline int getBanca()const{return banca_;} //Función que devuelve el dinero de la banca
         inline int getBola()const{return bola_;} //Función que devuelve la bola obtenida
         bool setBanca(int const &fondo); //Función que asocia el dinero insertado al de la banca
