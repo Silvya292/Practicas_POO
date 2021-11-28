@@ -19,7 +19,6 @@ bool Ruleta::setBanca(int const &fondo){ //Asociación del valor insertado al di
 bool Ruleta::setBola(int const &numero){ //Asociación del número insertado a la bola de la ruleta
     if((numero>-1)&&(numero<37)){ //Si es un valor válido se asocia
         bola_=numero;
-        Nlanzamientos_++; //Aumento del número de lanzamientos de la bola
         return true;
     }
     return false;
@@ -27,12 +26,10 @@ bool Ruleta::setBola(int const &numero){ //Asociación del número insertado a l
 
 bool Ruleta::addJugador(Jugador &jugador){ //Adición de un jugador a la lista de la ruleta
     list <Jugador>::iterator j; //Se define un iterador para la lista
-    j=jugadores_.begin(); //Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){
-        if(jugador.getDNI()==(*j).getDNI()){ //Si el jugador ya existe en la lista se devuelve false
+    for(j=jugadores_.begin();j!=jugadores_.end();j++){
+        if(j->getDNI()==jugador.getDNI()){ //Si el jugador ya existe en la lista se devuelve false
             return false;
         }
-        j++; //Se aumenta la posición del iterador
     }
     jugadores_.push_back(jugador); //Si no existe previamente se añade al final de la lista
     fstream file((jugador.getDNI()+".txt"),fstream::app); //Se define un fichero genérico y se abre para añadir datos al final
@@ -44,34 +41,29 @@ bool Ruleta::addJugador(Jugador &jugador){ //Adición de un jugador a la lista d
 }
 
 int Ruleta::deleteJugador(string const &dni){ //Eliminación de un jugador por DNI
-    list <Jugador>::iterator j; //Se define un iterador para la lista
-    j=jugadores_.begin(); //Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){
-        if(dni==(*j).getDNI()){ //Si el DNI del jugador ya existe en la lista se elimina
-            j=jugadores_.erase(j);
-            return 1;
-        }
-        j++;
-    }
     if(jugadores_.empty()){ //Si la lista está vacía se devuelve -1
         return -1;
+    }
+    list <Jugador>::iterator j; //Se define un iterador para la lista
+    for(j=jugadores_.begin();j!=jugadores_.end();j++){
+        if(j->getDNI()==dni){ //Si el DNI del jugador ya existe en la lista se elimina
+            jugadores_.erase(j);
+            return 1;
+        }
     }
     return -2; //Si no se ha encontrado devuelve -2
 }
 
-int Ruleta::deleteJugador(Jugador &jugador){ //Eliminación de un jugador por objeto de clase
-    list <Jugador>::iterator j; //Se define un iterador para la lista
-    j=jugadores_.begin(); //Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){
-        if(jugador.getDNI()==(*j).getDNI()){ //Si el DNI del jugador ya existe en la lista se elimina
-            j=jugadores_.erase(j);
-            return 1;
-        }
-        j++;
-    }
-
+int Ruleta::deleteJugador(Jugador &jugador){ //Eliminación de un jugador por DNI
     if(jugadores_.empty()){ //Si la lista está vacía se devuelve -1
         return -1;
+    }
+    list <Jugador>::iterator j; //Se define un iterador para la lista
+    for(j=jugadores_.begin();j!=jugadores_.end();j++){
+        if(j->getDNI()==jugador.getDNI()){ //Si el DNI del jugador ya existe en la lista se elimina
+            jugadores_.erase(j);
+            return 1;
+        }
     }
     return -2; //Si no se ha encontrado devuelve -2
 }
@@ -84,10 +76,16 @@ void Ruleta::escribeJugadores(){ //Inscripción de jugadores
     }
 
     list <Jugador>::iterator j; //Se define un iterador para la lista
-    j=jugadores_.begin(); //Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){ //Se añade un jugador y se mueve la dirección a la que apunta el iterador
-        file<<(*j).getDNI()<<','<<(*j).getCodigo()<<','<<(*j).getNombre()<<','<<(*j).getApellidos()<<','<<(*j).getDireccion()<<','<<(*j).getLocalidad()<<','<<(*j).getProvincia()<<','<<(*j).getPais()<<','<<(*j).getDinero()<<'\n';
-        j++;
+    for(j=jugadores_.begin();j!=jugadores_.end();j++){ 
+        file<<j->getDNI()<<','
+        <<j->getCodigo()<<','
+        <<j->getNombre()<<','
+        <<j->getApellidos()<<','
+        <<j->getDireccion()<<','
+        <<j->getLocalidad()<<','
+        <<j->getProvincia()<<','
+        <<j->getPais()<<','
+        <<j->getDinero()<<'\n';
     }
     file.close(); //Se cierra el fichero
 }
@@ -127,8 +125,8 @@ void Ruleta::leeJugadores(){ //Lectura de los jugadores de la lista
 }
 
 bool Ruleta::rojo_negro(string const &color){ //Comprobación del color
-    vector <int> rojo={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
-    vector <int> negro={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35};
+    vector <int> rojo={1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36}; //Vector de números rojos
+    vector <int> negro={2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35}; //Vector de números negros
     if(bola_==0){ //Si es 0 devuelve falso al no tener ningún color
         return false;
     }
@@ -150,8 +148,8 @@ bool Ruleta::rojo_negro(string const &color){ //Comprobación del color
 }
 
 bool Ruleta::par_impar(string const &parimpar){ //Comprobación de la paridad
-    vector <int> par={2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36};
-    vector <int> impar={1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35};
+    vector <int> par={2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36}; //Vector de números pares
+    vector <int> impar={1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35}; //Vector de números impares
     if(bola_==0){ //Si es 0 se devuelve falso
         return false;
     }
@@ -173,7 +171,7 @@ bool Ruleta::par_impar(string const &parimpar){ //Comprobación de la paridad
 }
 
 bool Ruleta::alto_bajo(string const &altobajo){ //Comprobación del número
-    vector <int> bajo={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+    vector <int> bajo={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18}; 
     vector <int> alto={19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36};
     if(bola_==0){ //Si es 0 se devuelve falso
         return false;
@@ -197,89 +195,75 @@ bool Ruleta::alto_bajo(string const &altobajo){ //Comprobación del número
 
 void Ruleta::getPremios(){ //Comprobación de los premios obtenidos
     list <Apuesta> apuestas; //Lista auxiliar de apuestas
-    list <Apuesta>::iterator a; //Se define un iterador para la lista
     list <Jugador>::iterator j; //Se define un iterador para la lista
-    j=jugadores_.begin(); //Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){//Se asocian las apuestas de todos los jugadores de la lista de la clase
-        (*j).setApuestas(); 
-        j++;
-    }
-    j=jugadores_.begin();//Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){
-        apuestas=(*j).getApuestas(); //Se asocian las apuestas del jugador a la lista de apuestas auxiliar
-        a=apuestas.begin(); //Se coloca el iterador al inicio de la lista
-        for(int k=0;k< (int) apuestas.size();k++){
-            switch((*a).tipo){ //Según el tipo de apuesta la ganancia difiere
+
+    for(j=jugadores_.begin();j!=jugadores_.end();j++){//Se asocian las apuestas de todos los jugadores de la lista de la clase
+        j->setApuestas();
+        apuestas=j->getApuestas(); //Se asocian las apuestas del jugador a la lista de apuestas auxiliar
+
+        for(auto i=apuestas.begin();i!=apuestas.end();i++){
+            Apuesta aux=*i;
+
+            switch(aux.tipo){ //Según el tipo de apuesta la ganancia difiere
                 case 1://Apuesta sencilla
-                    if(stoi((*a).valor)==bola_){
-                        (*j).setDinero((*j).getDinero()+((*a).cantidad*35));
-                        setBanca(getBanca()-((*a).cantidad*35));
-                        beneficioBanca_+=-((*a).cantidad*35);
+                    if(stoi(aux.valor)==bola_){
+                        j->setDinero(j->getDinero()+(aux.cantidad*35));
+                        setBanca(getBanca()-(aux.cantidad*35));
                         break;
                     }
                     else{
-                        (*j).setDinero((*j).getDinero()-(*a).cantidad);
-                        setBanca(getBanca()+(*a).cantidad);
-                        beneficioBanca_+=(*a).cantidad;
+                        j->setDinero(j->getDinero()-aux.cantidad);
+                        setBanca(getBanca()+aux.cantidad);
                         break;
                     }
 
                 case 2://Apuesta rojo o negro
-                    if(rojo_negro((*a).valor)){
-                        (*j).setDinero((*j).getDinero()+(*a).cantidad);
-                        setBanca(getBanca()-(*a).cantidad);
-                        beneficioBanca_+=-(*a).cantidad;
+                    if(rojo_negro(aux.valor)){
+                        j->setDinero(j->getDinero()+aux.cantidad);
+                        setBanca(getBanca()-aux.cantidad);
                         break;
                     }
                     else{
-                        (*j).setDinero((*j).getDinero()-(*a).cantidad);
-                        setBanca(getBanca()+(*a).cantidad);
-                        beneficioBanca_+=(*a).cantidad;
+                        j->setDinero(j->getDinero()-aux.cantidad);
+                        setBanca(getBanca()+aux.cantidad);
                         break;
                     }
                 
                 case 3://Apuesta par o impar
-                    if(par_impar((*a).valor)){
-                        (*j).setDinero((*j).getDinero()+(*a).cantidad);
-                        setBanca(getBanca()-(*a).cantidad);
-                        beneficioBanca_+=-(*a).cantidad;
+                    if(par_impar(aux.valor)){
+                        j->setDinero(j->getDinero()+aux.cantidad);
+                        setBanca(getBanca()-aux.cantidad);
                         break;
                     }
                     else{
-                        (*j).setDinero((*j).getDinero()-(*a).cantidad);
-                        setBanca(getBanca()+(*a).cantidad);
-                        beneficioBanca_+=(*a).cantidad;
+                        j->setDinero(j->getDinero()-aux.cantidad);
+                        setBanca(getBanca()+aux.cantidad);
                         break;
                     }
                 
                 case 4://Apuesta alto o bajo
-                    if(alto_bajo((*a).valor)){
-                        (*j).setDinero((*j).getDinero()+(*a).cantidad);
-                        setBanca(getBanca()-(*a).cantidad);
-                        beneficioBanca_+=-(*a).cantidad;
+                    if(alto_bajo(aux.valor)){
+                        j->setDinero(j->getDinero()+aux.cantidad);
+                        setBanca(getBanca()-aux.cantidad);
                         break;
                     }
                     else{
-                        (*j).setDinero((*j).getDinero()-(*a).cantidad);
-                        setBanca(getBanca()+(*a).cantidad);
-                        beneficioBanca_+=(*a).cantidad;
+                        j->setDinero(j->getDinero()-aux.cantidad);
+                        setBanca(getBanca()+aux.cantidad);
                         break;
                     }
             }
-            a++;
         }
-        j++;
     }
 }
+
 
 void Ruleta::getEstadoRuleta(int &Njugadores, int &sumaDinero, int &Nlanzamientos, int &beneficioBanca){ //Información del estado de la ruleta
     Njugadores=(int) jugadores_.size();
     sumaDinero=banca_; //Se asocia en primer lugar el dinero de la banca a la suma de dinero total
     list <Jugador>::iterator j; //Se define un iterador para la lista
-    j=jugadores_.begin(); //Se coloca el iterador al inicio de la lista
-    for(int i=0;i< (int) jugadores_.size();i++){
-        sumaDinero += (*j).getDinero();
-        j++;
+    for(j=jugadores_.begin();j!=jugadores_.end();j++){
+        sumaDinero += j->getDinero();
     }
     Nlanzamientos=Nlanzamientos_; //Se asocia el número de lanzamientos
     beneficioBanca=beneficioBanca_; //Se asocia el beneficio de la banca
