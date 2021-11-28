@@ -26,9 +26,9 @@ int main(void){
             cout << "El nº buscado es mayor\nEscriba un nº: ";
             cin >> guess; //Se pide insertar de nuevo otro nº
         }
-    }while(guess!=n);
+    }while(guess!=n); //Esto se repetirá hasta que el usuario acierte el número generado
 
-    if(guess==n){ //Seimprime este mensaje si se acertó el nº
+    if(guess==n){ //Se imprime este mensaje si se acertó el nº
         cout << "Ha acertado el nº buscado\n";
     } 
     

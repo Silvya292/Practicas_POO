@@ -5,12 +5,12 @@
 
 using namespace std;
 
-namespace n1{
+namespace n1{ //Espacio de nombre n1
     int a; //Ésta es la variable n1::a
     int b; //Ésta es la variable n1::b
 }
 
-namespace n2{
+namespace n2{ //Espacio de nombre n2
     int a; //Ésta es la variable n2::a
     int c; //Ésta es la variable n2::c
 }
