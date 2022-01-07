@@ -23,7 +23,7 @@ vector <Jugador> leeJugadores(){ //Lectura de los jugadores de la lista
 
     vector <Jugador> jugadores_; //Se crea un vector de jugadores
 
-    jugadores_.empty(); //Se vacía el vector
+    jugadores_.clear(); //Se vacía el vector
     Jugador jugador_aux("x","x"); //Se define un jugador auxiliar
     string dato;
     getline(file,dato,','); //Se lee el primer elemento de la lista
